@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -x
 
 URI=$@ # eg: gitlab://username/project:master/kubernetes/helm-chart, github-https://username/project:v1/path
 PROVIDER=$(echo $URI | cut -d: -f1) # eg: gitlab, bitbucket
@@ -16,7 +16,7 @@ cd $TMPDIR
 
 git init --quiet
 if [ "bitbucket" = $PROVIDER ]; then
-  git remote add origin git@bitbucket.org:imvu/$REPO.git
+  git remote add origin git@bitbucket.org:$REPO.git
 else
   git remote add origin git@$PROVIDER.com:$REPO.git
 fi
